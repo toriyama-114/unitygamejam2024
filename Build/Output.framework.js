@@ -1975,13 +1975,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  3729100: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 3729155: function($0) {performance.now = function() { return $0; };},  
- 3729203: function($0) {performance.now = function() { return $0; };},  
- 3729251: function() {performance.now = Module['emscripten_get_now_backup'];},  
- 3729306: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 3729367: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 3729431: function() {return Module.webglContextAttributes.powerPreference;}
+  3729292: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 3729347: function($0) {performance.now = function() { return $0; };},  
+ 3729395: function($0) {performance.now = function() { return $0; };},  
+ 3729443: function() {performance.now = Module['emscripten_get_now_backup'];},  
+ 3729498: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 3729559: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 3729623: function() {return Module.webglContextAttributes.powerPreference;}
 };
 
 
@@ -3776,6 +3776,18 @@ var ASM_CONSTS = {
   	catch (e) {
   		alert('Web Audio API is not supported in this browser');
   	}
+  }
+
+  function _JS_Sound_IsStopped(channelInstance)
+  {
+  	if (WEBAudio.audioWebEnabled == 0)
+  		return true;
+  	
+  	var channel = WEBAudio.audioInstances[channelInstance];
+  	if (!channel)
+  		return true;
+  
+  	return channel.isStopped();
   }
 
   function jsAudioCreateUncompressedSoundClipFromCompressedAudio(audioData) {
@@ -14922,6 +14934,7 @@ var asmLibraryArg = {
   "JS_Sound_GetLength": _JS_Sound_GetLength,
   "JS_Sound_GetLoadState": _JS_Sound_GetLoadState,
   "JS_Sound_Init": _JS_Sound_Init,
+  "JS_Sound_IsStopped": _JS_Sound_IsStopped,
   "JS_Sound_Load": _JS_Sound_Load,
   "JS_Sound_Load_PCM": _JS_Sound_Load_PCM,
   "JS_Sound_Play": _JS_Sound_Play,
